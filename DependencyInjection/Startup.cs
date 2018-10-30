@@ -11,6 +11,7 @@ namespace DependencyInjection
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IRepository, MemoryRepository>();
+            services.AddTransient<IModelStorage, DictionaryStorage>();
             services.AddMvc();
         }
 
