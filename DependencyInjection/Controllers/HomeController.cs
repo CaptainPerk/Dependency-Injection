@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DependencyInjection.Infrastructure;
+using DependencyInjection.Models.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DependencyInjection.Controllers
 {
     public class HomeController : Controller
     {
-        public ViewResult Index() => View();
+        public IRepository Repository { get; set; } = TypeBroker.Repository;
+
+        public ViewResult Index() => View(Repository.Products);
     }
 }
