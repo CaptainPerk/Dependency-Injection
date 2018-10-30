@@ -1,5 +1,5 @@
-﻿using DependencyInjection.Infrastructure;
-using DependencyInjection.Models;
+﻿using DependencyInjection.Models;
+using DependencyInjection.Models.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +10,7 @@ namespace DependencyInjection
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            TypeBroker.SetRepositoryType<AlternateRepository>();
+            services.AddTransient<IRepository, MemoryRepository>();
             services.AddMvc();
         }
 
