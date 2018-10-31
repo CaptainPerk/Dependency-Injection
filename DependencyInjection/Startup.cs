@@ -10,7 +10,7 @@ namespace DependencyInjection
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IRepository, MemoryRepository>();
+            services.AddSingleton<IRepository, MemoryRepository>();
             services.AddTransient<IModelStorage, DictionaryStorage>();
             services.AddTransient<ProductTotalizer>();
             services.AddMvc();

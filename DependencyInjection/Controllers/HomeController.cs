@@ -1,24 +1,19 @@
 ﻿using DependencyInjection.Models;
 using DependencyInjection.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DependencyInjection.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRepository _repository;
-        private readonly ProductTotalizer _productTotalizer;
-
-        public HomeController(IRepository repository, ProductTotalizer productTotalizer)
+        public ViewResult Index([FromServices]ProductTotalizer productTotalizer)
         {
-            _repository = repository;
-            _productTotalizer = productTotalizer;
-        }
+            var repository = HttpContext.RequestServices.GetService<IRepository>();
 
-        public ViewResult Index()
-        {
-            ViewBag.Total = _productTotalizer.Total;
-            return View(_repository.Products);
+            ViewBag.HomeController = repository.ToString();
+            ViewBag.Totalizer = productTotalizer.Repository.ToString();
+            return View(repository.Products);
         }
     }
 }
